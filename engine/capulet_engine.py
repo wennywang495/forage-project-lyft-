@@ -1,11 +1,15 @@
-from engine import Engine
+import os, sys
+currentdir = os.path.dirname(os.path.realpath(__file__))
+parentdir = os.path.dirname(currentdir)
+sys.path.append(parentdir)
+from engine.engine import Engine
 
 
 class CapuletEngine(Engine):
-    def __init__(self, last_service_date, current_mileage, last_service_mileage):
-        super().__init__(last_service_date)
+    def __init__(self, last_service_mileage,current_mileage):
+        
         self.current_mileage = current_mileage
         self.last_service_mileage = last_service_mileage
 
-    def engine_should_be_serviced(self):
+    def needs_service(self):
         return self.current_mileage - self.last_service_mileage > 30000
